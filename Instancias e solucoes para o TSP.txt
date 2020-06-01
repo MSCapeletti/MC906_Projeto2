@@ -1,0 +1,3 @@
+
+Instâncias e soluções ótimas para o TSP:
+http://comopt.ifi.uni-heidelberg.de/software/TSPLIB95/tsp/
