@@ -1,3 +1,0 @@
-tutorial networkx para trabalhar com grafos
-
-https://networkx.github.io/documentation/stable/tutorial.html
