@@ -1,3 +1,5 @@
+from city import City
+from hospital import Hospital
 
 if __name__ == '__main__':
     '''
@@ -14,3 +16,11 @@ if __name__ == '__main__':
         - Nova geração
         - Repete o procedimento
     '''
+    city = City(100, 100)
+    h1 = Hospital(23, 34, 3, city)
+    h2 = Hospital(16, 34, 2, city)
+    h3 = Hospital(1, 1, 10, city)
+    h4 = Hospital(50, 34, 2, city)
+    h5 = Hospital(40, 90, 1, city)
+    h6 = Hospital(3, 3, 5, city)
+    h7 = Hospital(20, 80, 3, city)
