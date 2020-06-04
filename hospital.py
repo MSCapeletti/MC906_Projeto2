@@ -17,6 +17,16 @@ class Hospital():
         self.y = y
         self.update_reach()
 
+    def update_range(self, range):
+        self.range = range
+        self.update_reach()
+
+    def update(self, x, y, range):
+        self.x = x
+        self.y = y
+        self.range = range
+        self.update_reach()
+
     #Atualiza a lista de posições atendidas pelo hospital usando distância manhattan
     def update_reach(self):
         self.reach = []
