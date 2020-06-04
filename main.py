@@ -1,6 +1,7 @@
 from city import City
 from hospital import Hospital
 from selection import Selector
+import random_initializer
 
 if __name__ == '__main__':
     '''
@@ -26,8 +27,17 @@ if __name__ == '__main__':
     h6 = Hospital(3, 3, 5, city)
     h7 = Hospital(20, 80, 3, city)
 
-    selector = Selector(5)
 
-    print(selector.fitness_function1([h1,h2]))
-    print(selector.fitness_function1([h1, h2, h1]))
-    print(selector.fitness_function1([h1, h2, h3]))
+    # Geração de individuo aleatório
+    # random_hospitals = random_initializer.random_hospitals(5, 2, city, 2, 1)
+    # for hospital in random_hospitals:
+    #     print("x: " + str(hospital.x) + ", y: " + str(hospital.y) + ", range: " + str(hospital.range))
+
+    # Geração de soluções (individuos) aleatórias
+    random_population = random_initializer.random_population(10, 5, 2, city, 2, 1)
+    i = 1
+    for individual in random_population:
+        print("\nIndividual " + str(i))
+        for hospital in individual:
+            print("x: " + str(hospital.x) + ", y: " + str(hospital.y) + ", range: " + str(hospital.range))
+        i = i + 1
