@@ -1,5 +1,6 @@
 from city import City
 from hospital import Hospital
+from selection import Selector
 
 if __name__ == '__main__':
     '''
@@ -24,3 +25,9 @@ if __name__ == '__main__':
     h5 = Hospital(40, 90, 1, city)
     h6 = Hospital(3, 3, 5, city)
     h7 = Hospital(20, 80, 3, city)
+
+    selector = Selector(5)
+
+    print(selector.fitness_function1([h1,h2]))
+    print(selector.fitness_function1([h1, h2, h1]))
+    print(selector.fitness_function1([h1, h2, h3]))

@@ -1,6 +1,6 @@
 class Selector():
-    def __init__(self, rate):
-        self.selection_rate = rate
+    def __init__(self, maxPopulation):
+        self.maxPopulation = maxPopulation
 
     def select_population(self, population):
         '''
@@ -19,10 +19,23 @@ class Selector():
         '''
         pass
 
-    def fitness_function(self, individual):
-        '''
-        Avalia cada indivíduo segundo certa função, o quão apto cada um é;
-        :param individual: indivíduo a ser avaliado;
-        :return: retorna o valor que representará a aptitude do indivíduo.
-        '''
+    def fitness_function1(self, individual):
+        #Uma posição no grid atendida por um hospital equivale a um ponto, 
+        #Uma posição no grid atendida por 2 ou mais hospitais também vale um ponto
+        #Uma posição no grid atendida por 0 hospitais vale 0 pontos
+
+        #Cada hospital gera uma penalidade de 1 ponto
+        #O maior alcance dos hospitais também gera uma penalidade
+        #O valor da aptidão será (area - custo) / max(range)
+        reached = []
+        custo = len(individual)
+        maxRange = 1
+        for hospital in individual:
+            reached.extend(hospital.get_reach())
+            if hospital.range > maxRange:
+                maxRange = hospital.range
+
+        area = len(set(reached))
+        fitness = float(area - custo) / maxRange
+        return fitness
 
