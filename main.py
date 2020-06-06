@@ -34,10 +34,24 @@ if __name__ == '__main__':
     #     print("x: " + str(hospital.x) + ", y: " + str(hospital.y) + ", range: " + str(hospital.range))
 
     # Geração de soluções (individuos) aleatórias
-    random_population = random_initializer.random_population(10, 5, 2, city, 2, 1)
-    i = 1
-    for individual in random_population:
-        print("\nIndividual " + str(i))
-        for hospital in individual:
-            print("x: " + str(hospital.x) + ", y: " + str(hospital.y) + ", range: " + str(hospital.range))
-        i = i + 1
+    # random_population = random_initializer.random_population(10, 5, 2, city, 2, 1)
+    # i = 1
+    # for individual in random_population:
+    #     print("\nIndividual " + str(i))
+    #     for hospital in individual:
+    #         print("x: " + str(hospital.x) + ", y: " + str(hospital.y) + ", range: " + str(hospital.range))
+    #     i = i + 1
+
+    # Teste seleção por torneio
+    # random_population = random_initializer.random_population(100, 5, 2, city, 2, 1)
+    # selector = Selector(50)
+    # tournamentWinners = selector.tournament(random_population, 10)
+
+    # i = 1
+    # for individual in tournamentWinners:
+    #     print("\nWinner " + str(i))
+    #     for hospital in individual:
+    #         print("x: " + str(hospital.x) + ", y: " + str(hospital.y) + ", range: " + str(hospital.range))
+    #     i = i + 1
+
+    

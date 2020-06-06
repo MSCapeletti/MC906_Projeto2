@@ -1,3 +1,5 @@
+import random
+
 class Selector():
     def __init__(self, maxPopulation):
         self.maxPopulation = maxPopulation
@@ -11,13 +13,23 @@ class Selector():
         pass
 
 
-    def tournament(self, sub_population):
-        '''
+    def tournament(self, population, tournamentSize):
+        fitness = {}
+        resultingPopulation = []
+        population_copy = population.copy()
+        for individual in population_copy:
+            fitness[tuple(individual)] = self.fitness_function1(individual)
 
-        :param sub_population: dada uma sub-população aplicaremos a fitness function em cada indivíduo;
-        :return: retornamos o mais apto dentre os indivíduos do subconjunto;
-        '''
-        pass
+        while len(resultingPopulation) < self.maxPopulation:
+            tournament = []
+            while len(tournament) < tournamentSize:
+                tournament.append(random.choice(population_copy))
+
+            tournament.sort(key=lambda x: fitness[tuple(x)], reverse=True)
+            resultingPopulation.append(tournament[0])
+            population_copy.remove(tournament[0])
+        
+        return resultingPopulation
 
     def fitness_function1(self, individual):
         #Uma posição no grid atendida por um hospital equivale a um ponto, 
