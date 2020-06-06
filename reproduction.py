@@ -1,3 +1,5 @@
+from hospital import Hospital
+
 def crossover(parent1, parent2):
     '''
     Efetua o crossover
@@ -12,3 +14,6 @@ def clone(parent):
     :param parent: pai, o individuo a ser clonado
     :return: o clone
     '''
+    cp = []
+    cp.extend(map(Hospital.copy, parent))
+    return cp
