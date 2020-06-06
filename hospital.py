@@ -8,6 +8,9 @@ class Hospital():
         self.reach = []
         self.update_reach()
 
+    def copy(self):
+        return Hospital(self.x, self.y, self.range, self.city)
+
     #A lista retornada pode ser modificada sem afetar o hospital
     def get_reach(self):
         return self.reach.copy()
