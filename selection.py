@@ -4,7 +4,7 @@ import random
 def sum_fitness(fitness, index):
     sum = 0
     sum_index = 0
-    while sum_index < index:
+    while sum_index <= index:
         sum += fitness[sum_index]
         sum_index += 1
     return sum
