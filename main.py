@@ -47,6 +47,11 @@ if __name__ == '__main__':
     # selector = Selector(50)
     # tournamentWinners = selector.tournament(random_population, 10)
 
+    # Teste de seleção usando o roulete method
+    # random_population = random_initializer.random_population(100, 5, 2, city, 2, 1)
+    # selector = Selector(50)
+    # tournamentWinners = selector.roulette_method(random_population, 10)
+    #
     # i = 1
     # for individual in tournamentWinners:
     #     print("\nWinner " + str(i))
