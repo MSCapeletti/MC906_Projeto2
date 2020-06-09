@@ -1,4 +1,5 @@
 import random
+import copy
 
 class Selector():
     def __init__(self, maxPopulation):
@@ -16,7 +17,7 @@ class Selector():
     def tournament(self, population, tournamentSize):
         fitness = {}
         resultingPopulation = []
-        population_copy = population.copy()
+        population_copy = copy.deepcopy(population)
         for individual in population_copy:
             fitness[tuple(individual)] = self.fitness_function1(individual)
 

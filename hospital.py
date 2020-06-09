@@ -1,15 +1,18 @@
 class Hospital():
 
-    def __init__(self, x, y, range, city):
+    def __init__(self, x, y, range, city, reach=None):
         self.x = x
         self.y = y
         self.range = range
         self.city = city
-        self.reach = []
-        self.update_reach()
+        if reach == None:
+            self.reach = []
+            self.update_reach()
+        else:
+            self.reach = reach
 
     def copy(self):
-        return Hospital(self.x, self.y, self.range, self.city)
+        return Hospital(self.x, self.y, self.range, self.city, self.reach)
 
     #A lista retornada pode ser modificada sem afetar o hospital
     def get_reach(self):
@@ -54,6 +57,3 @@ class Hospital():
             xDist = xDist - 1
 
         self.reach = set(self.reach)
-        
-
-

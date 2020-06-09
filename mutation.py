@@ -1,18 +1,14 @@
 import random as rand
+import copy
 
 def flip(individual):
-    '''
-    Cada gene a ser mutado no cromossomo recebe um valor válido
-    :param individual: O cromossomo a ser mutado
-    :return: O cromossomo mutado
-    '''
     # individual é um array de Hospital
-    cp = individual.copy()
+    cp = copy.deepcopy(individual)
     num_flips = rand.randint(0, len(cp) - 1)
     for _ in range(num_flips):
         # gera um índice aleatório pra fazer o flip
         idx = rand.randint(0, len(cp) - 1)
-        hospital = cp[idx].copy()
+        hospital = cp[idx]
         city = hospital.city
         
         # gera valores aleatórios pra mudar
