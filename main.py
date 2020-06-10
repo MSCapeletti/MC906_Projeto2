@@ -41,6 +41,32 @@ if __name__ == '__main__':
     #     for hospital in individual:
     #         print("x: " + str(hospital.x) + ", y: " + str(hospital.y) + ", range: " + str(hospital.range))
     #     i = i + 1
+ #Generação de mutation  generative
+    #mutationGenerative = mutation.generative(random_population)
+    #i = 1
+    #for individual in mutationGenerative:
+    #    print("\nMutuation Generative" + str(i))
+    #    for hospital in individual:
+    #        print("x: " + str(hospital.x) + ", y: " + str(hospital.y) + ", range: " + str(hospital.range))
+    #    i = i + 1
+
+    #Generação de mutation  destructiva
+    #mutationDestructive = mutation.destructive(random_population)
+    #j = 1
+    #for individuo in mutationDestructive:
+    #    print("\nMutuation Destructive " + str(j))
+    #    for hospital in individuo:
+    #        print("x: " + str(hospital.x) + ", y: " + str(hospital.y) + ", range: " + str(hospital.range))
+    #    j = j + 1
+
+    #Generação de mutatuion swap
+    #mutationSwap = mutation.swap(random_population)
+    #k = 1
+    #for individuo in mutationSwap:
+    #    print("\nMutuation Swap " + str(k))
+    #    for hospital in individuo:
+    #        print("x: " + str(hospital.x) + ", y: " + str(hospital.y) + ", range: " + str(hospital.range))
+    #    k = k + 1
 
     # Teste seleção por torneio
     # random_population = random_initializer.random_population(100, 5, 2, city, 2, 1)
