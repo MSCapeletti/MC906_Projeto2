@@ -1,4 +1,5 @@
 from hospital import Hospital
+import copy
 
 def crossover(parent1, parent2):
     '''
@@ -14,6 +15,7 @@ def clone(parent):
     :param parent: pai, o individuo a ser clonado
     :return: o clone
     '''
-    cp = []
-    cp.extend(map(Hospital.copy, parent))
-    return cp
+    # cp = []
+    # cp.extend(map(Hospital.copy, parent))
+    # return cp
+    return copy.deepcopy(parent)

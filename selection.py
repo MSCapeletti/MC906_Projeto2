@@ -1,6 +1,15 @@
 import random
 import copy
+import math
 
+def memoize_fitness(f):
+    memo = {}
+    def helper(x):
+        x_ = tuple(x)
+        if x_ not in memo:            
+            memo[x_] = f(x)
+        return memo[x_]
+    return helper
 
 def sum_fitness(fitness, index):
     sum = 0
@@ -9,6 +18,26 @@ def sum_fitness(fitness, index):
         sum += fitness[sum_index]
         sum_index += 1
     return sum
+
+#Uma posição no grid atendida por um hospital equivale a um ponto, 
+#Uma posição no grid atendida por 2 ou mais hospitais também vale um ponto
+#Uma posição no grid atendida por 0 hospitais vale 0 pontos
+@memoize_fitness
+def fitness_function1(individual):
+    #Cada hospital gera uma penalidade de 1 ponto
+    #O maior alcance dos hospitais também gera uma penalidade
+    #O valor da aptidão será (area - custo) / max(range)
+    reached = []
+    custo = len(individual)
+    maxRange = 1
+    for hospital in individual:
+        reached.extend(hospital.get_reach())
+        if hospital.range > maxRange:
+            maxRange = hospital.range
+
+    area = len(set(reached))
+    fitness = float(area - custo) / maxRange
+    return fitness
 
 
 class Selector():
@@ -25,20 +54,21 @@ class Selector():
 
 
     def tournament(self, population, tournamentSize):
-        fitness = {}
         resultingPopulation = []
-        population_copy = copy.deepcopy(population)
-        for individual in population_copy:
-            fitness[tuple(individual)] = self.fitness_function1(individual)
 
         while len(resultingPopulation) < self.maxPopulation:
             tournament = []
+            best = -math.inf
+            bestInTournament = None
             while len(tournament) < tournamentSize:
-                tournament.append(random.choice(population_copy))
+                candidate = random.choice(population)
+                tournament.append(candidate)
+                if fitness_function1(candidate) > best:
+                    best = fitness_function1(candidate)
+                    bestInTournament = candidate
 
-            tournament.sort(key=lambda x: fitness[tuple(x)], reverse=True)
-            resultingPopulation.append(tournament[0])
-            population_copy.remove(tournament[0])
+            resultingPopulation.append(bestInTournament)
+            population.remove(bestInTournament)
         
         return resultingPopulation
 
@@ -47,37 +77,19 @@ class Selector():
         resulting_population = []
         sum = 0
         for individual_c in range(len(population)):
-            fitness.append(self.fitness_function1(population[individual_c]))
+            fitness.append(fitness_function1(population[individual_c]))
             sum += fitness[individual_c]
 
         while len(resulting_population) < tournamentSize:
             random_pivot = random.randrange(int(sum))
 
             for individual_index in range(len(population) - 1):
-                individual_sum = 0
+                #individual_sum = 0
                 if sum_fitness(fitness, individual_index) >= random_pivot:
                     resulting_population.append(population[individual_index])
                     break
         return resulting_population
 
 
-    def fitness_function1(self, individual):
-        #Uma posição no grid atendida por um hospital equivale a um ponto, 
-        #Uma posição no grid atendida por 2 ou mais hospitais também vale um ponto
-        #Uma posição no grid atendida por 0 hospitais vale 0 pontos
-
-        #Cada hospital gera uma penalidade de 1 ponto
-        #O maior alcance dos hospitais também gera uma penalidade
-        #O valor da aptidão será (area - custo) / max(range)
-        reached = []
-        custo = len(individual)
-        maxRange = 1
-        for hospital in individual:
-            reached.extend(hospital.get_reach())
-            if hospital.range > maxRange:
-                maxRange = hospital.range
-
-        area = len(set(reached))
-        fitness = float(area - custo) / maxRange
-        return fitness
+   
 

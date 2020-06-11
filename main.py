@@ -2,6 +2,10 @@ from city import City
 from hospital import Hospital
 from selection import Selector
 import random_initializer
+import solver
+import cProfile
+import pstats
+
 
 if __name__ == '__main__':
     '''
@@ -85,4 +89,8 @@ if __name__ == '__main__':
     #         print("x: " + str(hospital.x) + ", y: " + str(hospital.y) + ", range: " + str(hospital.range))
     #     i = i + 1
 
-    
+
+    profile = cProfile.Profile()
+    profile.runcall(solver.solver1, city, 1000, 10, 3, maxIterations=100)
+    ps = pstats.Stats(profile)
+    ps.print_stats()
