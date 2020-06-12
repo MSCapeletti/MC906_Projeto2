@@ -27,8 +27,21 @@ def solver1(city, populationSize, meanNumHospitals, meanHospitalRange,
 
     while iterations < maxIterations and convergence < convergenceCriteria:
 
-        #TODO crossover
         crossoverGeneration = []
+        parents = random.sample(generation, round(len(generation)*crossoverRatio))
+        for parent1 in parents:
+            parent2 = random.choice(parents)
+            while parent2 == parent1 and len(parents) > 1:
+                parent2 = random.choice(parents)
+            child1, child2 = reproduction.crossover(parent1, parent2)
+            crossoverGeneration.append(child1)
+            crossoverGeneration.append(child2)
+            parents.remove(parent1)
+            try:
+                parents.remove(parent2)
+            except:
+                pass
+            
 
         # mutation generated solutions
         mutatedGeneration = []

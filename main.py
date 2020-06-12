@@ -90,28 +90,28 @@ if __name__ == '__main__':
     #     i = i + 1
 
 
-    # profile = cProfile.Profile()
-    # profile.runcall(solver.solver1, city, 1000, 10, 3, maxIterations=100)
-    # ps = pstats.Stats(profile)
-    # ps.print_stats()
+    profile = cProfile.Profile()
+    profile.runcall(solver.solver1, city, 100, 10, 3, maxIterations=200)
+    ps = pstats.Stats(profile)
+    ps.print_stats()
 
-    bestIndividual, resultDict = solver.solver1(city, 700, 8, 3, maxIterations=500)
+    # bestIndividual, resultDict = solver.solver1(city, 500, 8, 3, maxIterations=500)
 
-    iterations = []
-    worst = []
-    mean = []
-    best = []
-    for k, v in resultDict.items():
-        iterations.append(k)
-        worst.append(v['Worst'])
-        mean.append(v['Mean'])
-        best.append(v['Best'])
+    # iterations = []
+    # worst = []
+    # mean = []
+    # best = []
+    # for k, v in resultDict.items():
+    #     iterations.append(k)
+    #     worst.append(v['Worst'])
+    #     mean.append(v['Mean'])
+    #     best.append(v['Best'])
 
-    plt.plot(iterations, worst, label='Worst')
-    plt.plot(iterations, mean, label='Mean')
-    plt.plot(iterations, best, label='Best')
-    plt.xlabel('Iterations')
-    plt.ylabel('Fitness')
-    plt.title('Resultado')
-    plt.legend()
-    plt.show()
+    # plt.plot(iterations, worst, label='Worst')
+    # plt.plot(iterations, mean, label='Mean')
+    # plt.plot(iterations, best, label='Best')
+    # plt.xlabel('Iterations')
+    # plt.ylabel('Fitness')
+    # plt.title('Resultado')
+    # plt.legend()
+    # plt.show()
