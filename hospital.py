@@ -43,6 +43,9 @@ class Hospital():
         else:
             self.reach = reach
 
+    def __repr__(self):
+        return "({},{})".format(self.x, self.y)
+
     def copy(self):
         return Hospital(self.x, self.y, self.range, self.city, self.reach)
 
