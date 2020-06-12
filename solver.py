@@ -7,12 +7,13 @@ import math
 import random
 import copy
 
-def solver1(city, populationSize, meanNumHospitals, meanHospitalRange, 
-    numHospitalsStandardDeviation=5, hospitalRangeStandardDeviation=2, 
-    maxIterations=10000, convergenceCriteria=100, crossoverRatio=0.5, mutationRatio=0.5):
 
+def solver1(city, populationSize, meanNumHospitals, meanHospitalRange,
+            numHospitalsStandardDeviation=5, hospitalRangeStandardDeviation=2,
+            maxIterations=10000, convergenceCriteria=100, crossoverRatio=0.5, mutationRatio=0.5):
     print("Generating starting population..")
-    generation = random_initializer.random_population(populationSize, meanNumHospitals, meanHospitalRange, city, numHospitalsStandardDeviation, hospitalRangeStandardDeviation)
+    generation = random_initializer.random_population(populationSize, meanNumHospitals, meanHospitalRange, city,
+                                                      numHospitalsStandardDeviation, hospitalRangeStandardDeviation)
 
     iterations = 0
     convergence = 0
@@ -25,9 +26,24 @@ def solver1(city, populationSize, meanNumHospitals, meanHospitalRange,
 
     iterationsResultDict[iterations] = {'Best': best, 'Worst': worst, 'Mean': mean}
 
-    while iterations < maxIterations and convergence < convergenceCriteria:
+    f1 = open("report.txt", "w")
+    # f2 = open("population.txt", "w")
 
-        #TODO crossover
+    iworst = None
+    while iterations < maxIterations and convergence < convergenceCriteria:
+        f1.write("iteration: {}\n".format(str(iterations + 1)))
+        f1.write("population size = {}, covered area =\nbest individual = {}\n"
+                 .format(str(len(generation)), str(bestIndividual)))
+        if iworst is not None:
+            f1.write("worst = {}, mean = {}, best = {}\n".format(str(iworst), str(imean), str(ibest)))
+
+        f1.write("--------------------------------------------------------------------------------------\n")
+
+        # f2.write("Population {}\n".format(str(iterations + 1)))
+        # for population in generation:
+        #     f2.write(str(population) + "\n")
+
+        # TODO crossover
         crossoverGeneration = []
 
         # mutation generated solutions
@@ -41,13 +57,15 @@ def solver1(city, populationSize, meanNumHospitals, meanHospitalRange,
                 if mutationType == 1:
                     mutatedGeneration.append(mutation.flip(solution, meanHospitalRange, hospitalRangeStandardDeviation))
                 elif mutationType == 2:
-                    mutatedGeneration.append(mutation.generative(solution, meanHospitalRange, hospitalRangeStandardDeviation))
+                    mutatedGeneration.append(
+                        mutation.generative(solution, meanHospitalRange, hospitalRangeStandardDeviation))
                 elif mutationType == 3:
                     mutatedGeneration.append(mutation.destructive(solution))
                 else:
                     mutatedGeneration.append(mutation.swap(solution))
 
         generation = selector.tournament(generation + crossoverGeneration + mutatedGeneration, 10)
+        # generation = selector.roulette_method(generation + crossoverGeneration + mutatedGeneration, 5)
 
         iworst, imean, ibest, ibestIndividual = getWorstMeanBest(generation)
 
@@ -57,13 +75,15 @@ def solver1(city, populationSize, meanNumHospitals, meanHospitalRange,
             best = ibest
             bestIndividual = copy.deepcopy(ibestIndividual)
             convergence = 0
-        
+
         if iterations % 10 == 0:
             print("iterations: " + str(iterations))
 
         iterations = iterations + 1
         convergence = convergence + 1
 
+    f1.close()
+    # f2.close()
     return bestIndividual, iterationsResultDict
 
 
