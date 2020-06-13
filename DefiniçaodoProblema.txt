@@ -1,0 +1,11 @@
+Definição do problema
+
+O problema com o qual estamos lidando é que, devido ao aumento de pacientes na região devido ao Covid 19, fazemos uma análise de como os hospitais estão localizados e como eles devem ser acomodados para melhor cobrir a região e, assim, poder atender de maneira adequada mais eficaz para os habitantes.
+
+Em relação à falta de cobertura hospitalar, em certas áreas das cidades e que estão sendo bastante evidenciadas pela situação atual de pandemia, optou-se por realizar um algoritmo para realizar uma análise dos hospitais atual e também permite otimizar a localização dos hospitais de acordo com as necessidades da população, permitindo, no futuro, atender ao maior número possível de populações e melhorar o sistema de saúde, o que esse algoritmo faz é levar a localização dos hospital e atribuir a eles um intervalo, esse intervalo é usado para medir o perímetro em (km) em que o hospital é responsável por cuidar das pessoas, O objetivo do algoritmo é determinar a localização ideal para os hospitais, evitando que algumas áreas da cidade possuam vários hospitais, enquanto outras não, os hospitais não estariam aproveitando seu desempenho máximo.
+
+A cidade será modelada com dados de X e Y, onde X significa a largura e Y o comprimento da cidade para obter uma melhor imagem da área da cidade. Por outro lado, cada hospital tem uma classificação X, Y, e sua cidade, aplicamos cidade porque esse algoritmo pode ser implementado em um estado onde mais cidades poderiam estar. Os X e Y do hospital referem-se às coordenadas no eixo x e no eixo y em relação à cidade em que está localizado; o intervalo, por outro lado, significa que o valor do intervalo será a área ao redor do hospital que pode ser servido por isso.
+
+O problema será definido como as áreas em que os hospitais não têm cobertura e o algoritmo procura otimizar a área de cobertura.
+
+O algoritmo funciona da seguinte maneira: primeiro, a população inicial será criada aleatoriamente, cada indivíduo contém uma lista x de hospitais localizados na área da cidade, o algoritmo será interrompido quando o indivíduo que cobre na maior área possível e melhor localizada, se o algoritmo não for seguido, ele continuará sendo executado com variações das gerações e através da reprodução sexual e assexual.
