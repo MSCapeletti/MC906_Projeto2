@@ -53,7 +53,7 @@ def generative(individual, meanReach, reachStandardDeviation):
 def destructive(individual):
     #gerar um aleatorio pra saber quantos hospitais seram destruidos
     copiaIndividual = individual.copy()
-    randomDestructive = rand.randint(1, 3)
+    randomDestructive = rand.randint(1, min(3, len(copiaIndividual)))
     j = 0
     while randomDestructive > j : 
         copiaIndividual.pop(rand.randint(0, len(copiaIndividual)-1))
@@ -68,46 +68,14 @@ def swap(individual):
     :param individual: O cromossomo a ser mutado
     :return: O cromossomo mutado
     '''
-    copiaSwap = copy.deepcopy(individual)
+    copiaSwap = individual.copy()
     
-    copiaSwap = editarHospitalesSwap(copiaSwap)
+    location = rand.randint(0, len(copiaSwap)-1)
+
+    hospital = copiaSwap[location].copy()
+
+    hospital.update_position(hospital.y, hospital.x)
+
+    copiaSwap[location] = hospital
     
     return copiaSwap
-
-def editarHospitalesSwap(individuo):
-    tamano = len(individuo) - 1 
-    aleatorioIndividuo = rand.randint(0, tamano)
-    #hospital
-    hospitalAleatorio = individuo[aleatorioIndividuo]
-    #mirar que cambiar en el hospital x o  y 
-    aleatorioXY = rand.randint(0,1)
-    
-    if aleatorioXY == 0:
-        y1 = getattr(hospitalAleatorio,"y")
-        hospital2 = compararHospitales(individuo, hospitalAleatorio, aleatorioXY) 
-        y2 = getattr(hospital2,"y")
-        x1 = getattr(hospitalAleatorio,"x")
-        x2 = getattr(hospital2,"x")
-        hospitalAleatorio.update_position(x2,y1)
-        hospital2.update_position(x1,y2) 
-    else : 
-        x1 = getattr(hospitalAleatorio,"x")
-        hospital2 = compararHospitales(individuo,hospitalAleatorio,aleatorioXY) 
-        x2 = getattr(hospital2,"x")
-        y1 = getattr(hospitalAleatorio,"y")
-        y2 = getattr(hospital2,"y")
-        hospitalAleatorio.update_position(x1,y2)
-        hospital2.update_position(x2,y1)
-    return individuo
-
-def compararHospitales(individuo, aleatorioIndividuo, aleatorioXY):
-    tamano2 = len(individuo) - 1
-    aleatorioIndividuo2 = rand.randint(0,tamano2)
-    hospitalAleatorio2 = individuo[aleatorioIndividuo2]
-    if( aleatorioXY==0): 
-        while(getattr(aleatorioIndividuo,"x")==getattr(hospitalAleatorio2,"x")):
-         aleatorioIndividuo2 = rand.randint(0,tamano2)
-    else :
-        while(getattr(aleatorioIndividuo,"y")==getattr(hospitalAleatorio2,"y")):
-         aleatorioIndividuo2 = rand.randint(0,tamano2)   
-    return hospitalAleatorio2

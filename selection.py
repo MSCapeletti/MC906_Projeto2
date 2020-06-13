@@ -72,16 +72,16 @@ class Selector():
         
         return resultingPopulation
 
-    def roulette_method(self, population, tournamentSize):
+    def roulette_method(self, population):
         fitness = []
         resulting_population = []
         sum = 0
-        for individual_c in range(len(population)):
-            fitness.append(fitness_function1(population[individual_c]))
-            sum += fitness[individual_c]
+        for individual in population:
+            fitness.append(fitness_function1(individual))
+            sum += fitness[-1]
 
-        while len(resulting_population) < tournamentSize:
-            random_pivot = random.randrange(int(sum))
+        while len(resulting_population) < self.maxPopulation:
+            random_pivot = random.uniform(0, sum)
 
             for individual_index in range(len(population) - 1):
                 #individual_sum = 0

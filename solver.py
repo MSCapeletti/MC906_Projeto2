@@ -43,8 +43,8 @@ def solver1(city, populationSize, meanNumHospitals, meanHospitalRange,
         parents = random.sample(generation, round(len(generation)*crossoverRatio))
         for parent1 in parents:
             parent2 = random.choice(parents)
-            while parent2 == parent1 and len(parents) > 1:
-                parent2 = random.choice(parents)
+            #while parent2 == parent1 and len(parents) > 1:
+            #    parent2 = random.choice(parents)
             child1, child2 = reproduction.crossover(parent1, parent2)
             crossoverGeneration.append(child1)
             crossoverGeneration.append(child2)
@@ -62,7 +62,7 @@ def solver1(city, populationSize, meanNumHospitals, meanHospitalRange,
             mutate = random.uniform(0, 1)
             if mutate <= mutationRatio:
                 # if the solution has been selected for mutation then the mutation is randomly chosen
-                mutationType = random.randint(1, 3)
+                mutationType = random.randint(1, 4)
                 if mutationType == 1:
                     mutatedGeneration.append(mutation.flip(solution, meanHospitalRange, hospitalRangeStandardDeviation))
                 elif mutationType == 2:
@@ -74,7 +74,7 @@ def solver1(city, populationSize, meanNumHospitals, meanHospitalRange,
                     mutatedGeneration.append(mutation.swap(solution))
 
         generation = selector.tournament(generation + crossoverGeneration + mutatedGeneration, 10)
-        # generation = selector.roulette_method(generation + crossoverGeneration + mutatedGeneration, 5)
+        #generation = selector.roulette_method(generation + crossoverGeneration + mutatedGeneration)
 
         iworst, imean, ibest, ibestIndividual = getWorstMeanBest(generation)
 
