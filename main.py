@@ -23,95 +23,35 @@ if __name__ == '__main__':
         - Repete o procedimento
     '''
     city = City(100, 100)
-    h1 = Hospital(23, 34, 3, city)
-    h2 = Hospital(16, 34, 2, city)
-    h3 = Hospital(1, 1, 10, city)
-    h4 = Hospital(50, 34, 2, city)
-    h5 = Hospital(40, 90, 1, city)
-    h6 = Hospital(3, 3, 5, city)
-    h7 = Hospital(20, 80, 3, city)
 
+    populationSize = 100
+    meanNumHospital = 8
+    meanHospitalRange = 3
+    maxIterations = 500
+    convergenceCriteria = 100
+    crossOverRatio = 0.1
+    mutationRatio = .9
+    bestIndividual, resultDict = solver.solver1(city, populationSize=populationSize, 
+    meanHospitalRange=meanHospitalRange, meanNumHospitals=meanNumHospital, maxIterations=maxIterations, convergenceCriteria=convergenceCriteria, 
+    crossoverRatio=crossOverRatio, mutationRatio=mutationRatio)
 
-    # Geração de individuo aleatório
-    # random_hospitals = random_initializer.random_hospitals(5, 2, city, 2, 1)
-    # for hospital in random_hospitals:
-    #     print("x: " + str(hospital.x) + ", y: " + str(hospital.y) + ", range: " + str(hospital.range))
+    iterations = []
+    worst = []
+    mean = []
+    best = []
+    for k, v in resultDict.items():
+        iterations.append(k)
+        worst.append(v['Worst'])
+        mean.append(v['Mean'])
+        best.append(v['Best'])
 
-    # Geração de soluções (individuos) aleatórias
-    # random_population = random_initializer.random_population(10, 5, 2, city, 2, 1)
-    # i = 1
-    # for individual in random_population:
-    #     print("\nIndividual " + str(i))
-    #     for hospital in individual:
-    #         print("x: " + str(hospital.x) + ", y: " + str(hospital.y) + ", range: " + str(hospital.range))
-    #     i = i + 1
- #Generação de mutation  generative
-    #mutationGenerative = mutation.generative(random_population)
-    #i = 1
-    #for individual in mutationGenerative:
-    #    print("\nMutuation Generative" + str(i))
-    #    for hospital in individual:
-    #        print("x: " + str(hospital.x) + ", y: " + str(hospital.y) + ", range: " + str(hospital.range))
-    #    i = i + 1
-
-    #Generação de mutation  destructiva
-    #mutationDestructive = mutation.destructive(random_population)
-    #j = 1
-    #for individuo in mutationDestructive:
-    #    print("\nMutuation Destructive " + str(j))
-    #    for hospital in individuo:
-    #        print("x: " + str(hospital.x) + ", y: " + str(hospital.y) + ", range: " + str(hospital.range))
-    #    j = j + 1
-
-    #Generação de mutatuion swap
-    #mutationSwap = mutation.swap(random_population)
-    #k = 1
-    #for individuo in mutationSwap:
-    #    print("\nMutuation Swap " + str(k))
-    #    for hospital in individuo:
-    #        print("x: " + str(hospital.x) + ", y: " + str(hospital.y) + ", range: " + str(hospital.range))
-    #    k = k + 1
-
-    # Teste seleção por torneio
-    # random_population = random_initializer.random_population(100, 5, 2, city, 2, 1)
-    # selector = Selector(50)
-    # tournamentWinners = selector.tournament(random_population, 10)
-
-    # Teste de seleção usando o roulete method
-    # random_population = random_initializer.random_population(100, 5, 2, city, 2, 1)
-    # selector = Selector(50)
-    # tournamentWinners = selector.roulette_method(random_population, 10)
-    #
-    # i = 1
-    # for individual in tournamentWinners:
-    #     print("\nWinner " + str(i))
-    #     for hospital in individual:
-    #         print("x: " + str(hospital.x) + ", y: " + str(hospital.y) + ", range: " + str(hospital.range))
-    #     i = i + 1
-
-
-    profile = cProfile.Profile()
-    profile.runcall(solver.solver1, city, 100, 10, 3, maxIterations=200)
-    ps = pstats.Stats(profile)
-    ps.print_stats()
-
-    # bestIndividual, resultDict = solver.solver1(city, 500, 8, 3, maxIterations=500)
-
-    # iterations = []
-    # worst = []
-    # mean = []
-    # best = []
-    # for k, v in resultDict.items():
-    #     iterations.append(k)
-    #     worst.append(v['Worst'])
-    #     mean.append(v['Mean'])
-    #     best.append(v['Best'])
-
-    # plt.plot(iterations, worst, label='Worst')
-    # plt.plot(iterations, mean, label='Mean')
-    # plt.plot(iterations, best, label='Best')
-    # plt.xlabel('Iterations')
-    # plt.ylabel('Fitness')
-    # plt.title('Resultado')
-    # plt.legend()
-    # plt.show()
+    plt.plot(iterations, worst, label='Worst')
+    plt.plot(iterations, mean, label='Mean')
+    plt.plot(iterations, best, label='Best')
+    plt.xlabel('Iterations')
+    plt.ylabel('Fitness')
+    plt.title('tournament - Population: '+str(populationSize)+
+    ', crossover: '+str(crossOverRatio)+', mutation: '+str(mutationRatio)+
+    ', iterations: '+str(maxIterations)+', convergence: '+str(convergenceCriteria))
+    plt.legend()
+    plt.show()
