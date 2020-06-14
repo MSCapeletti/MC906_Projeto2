@@ -27,12 +27,11 @@ def solver1(city, populationSize, meanNumHospitals, meanHospitalRange,
     iterationsResultDict[iterations] = {'Best': best, 'Worst': worst, 'Mean': mean}
 
     f1 = open("report.txt", "w")
-    # f2 = open("population.txt", "w")
 
     iworst = None
     while iterations < maxIterations and convergence < convergenceCriteria:
         f1.write("iteration: {}\n".format(str(iterations + 1)))
-        f1.write("population size = {}, covered area =\nbest individual = {}\n"
+        f1.write("population size = {}, best individual = {}\n"
                  .format(str(len(generation)), str(bestIndividual)))
         if iworst is not None:
             f1.write("worst = {}, mean = {}, best = {}\n".format(str(iworst), str(imean), str(ibest)))
@@ -92,7 +91,6 @@ def solver1(city, populationSize, meanNumHospitals, meanHospitalRange,
         convergence = convergence + 1
 
     f1.close()
-    # f2.close()
     return bestIndividual, iterationsResultDict
 
 
